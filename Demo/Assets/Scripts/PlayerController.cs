@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirection))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirection), typeof(Damageable))]
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
@@ -12,11 +12,20 @@ public class PlayerController : MonoBehaviour
     public float jumpImpulse = 10f;
     public float airWalkSpeed = 3f;
     TouchingDirection touchingDirection;
+    Damageable damageable;
     public bool canMove
     {
         get
         {
             return animator.GetBool(AnimationStrings.canMove);
+        }
+    }
+
+    public bool IsAlive
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isAlive);
         }
     }
     public float CurrentSpeed
@@ -101,11 +110,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<TouchingDirection>();
+        damageable = GetComponent<Damageable>();
     }
     // Start is called before the first frame update
     void Start()
@@ -121,14 +133,23 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * CurrentSpeed, rb.velocity.y);
+        if(!damageable.LockVelocity)
+            rb.velocity = new Vector2(moveInput.x * CurrentSpeed, rb.velocity.y);
+
         animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
     }
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
-        SetFacingDirection(moveInput);
+        if(IsAlive)
+        {
+            IsMoving = moveInput != Vector2.zero;
+            SetFacingDirection(moveInput);
+        } 
+        else
+        {
+            IsMoving = false;
+        }
     }
 
     private void SetFacingDirection(Vector2 moveInput)
@@ -171,5 +192,10 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger(AnimationStrings.jumping);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
         }
+    }
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
     }
 }
