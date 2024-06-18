@@ -65,7 +65,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06728697, y: -0.50465274}
+  m_Offset: {x: -0.3321784, y: -0.50465274}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5476027, y: 2.0093079}
+  m_Size: {x: 2.01782, y: 2.0093079}
   m_EdgeRadius: 0
 --- !u!114 &477284626354402339
 MonoBehaviour:
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: -2137767480670633909}
   - component: {fileID: -7301531111076587301}
   - component: {fileID: 6503429951786410621}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KnightEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,5 +307,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackZone: {fileID: 477284626354402339}
+  walkStopRate: 0.05
   walkSpeed: 3
   _hasTarget: 0
