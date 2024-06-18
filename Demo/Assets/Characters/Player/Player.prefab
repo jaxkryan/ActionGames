@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 8683868161619580531}
   - component: {fileID: 8839137606578484676}
   - component: {fileID: 4814759533604263766}
-  m_Layer: 0
+  - component: {fileID: 2043088936735204808}
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   runSpeed: 10
-  jumpImpulse: 10
+  jumpImpulse: 5
   airWalkSpeed: 3
   _isMoving: 0
   _isRunning: 0
@@ -253,7 +254,19 @@ MonoBehaviour:
     m_ActionId: 4f520cf8-eab7-46c2-9c3c-99e36e58d249
     m_ActionName: Player/Run[/Keyboard/leftShift]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1607725449858402806}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 60ddeb89-ec01-4c17-9ac5-96c25fa778df
     m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
@@ -314,8 +327,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0727613, y: -0.26194024}
-  m_Size: {x: 1.1313438, y: 1.8444035}
+  m_Offset: {x: -0.0727613, y: -0.22277021}
+  m_Size: {x: 1.1313438, y: 1.7660635}
   m_Direction: 0
 --- !u!114 &4814759533604263766
 MonoBehaviour:
@@ -338,10 +351,28 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
   groundDistance: 0.05
   _isGround: 1
+  _isOnWall: 0
+  _isOnCelling: 0
+--- !u!114 &2043088936735204808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670572082697007339}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b13fa5f0f8e5949b0bc8094b9d04e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackZone: {fileID: 0}
+  walkStopRate: 0.6
+  walkSpeed: 3
+  _hasTarget: 0
