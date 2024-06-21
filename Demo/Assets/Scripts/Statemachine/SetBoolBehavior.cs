@@ -23,7 +23,7 @@ public class SetBoolBehavior : StateMachineBehaviour
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (updateOnState) { animator.SetBool(boolName, valueOnEnter); }
+        if (updateOnState) { animator.SetBool(boolName, valueOnExit); }
     }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine
