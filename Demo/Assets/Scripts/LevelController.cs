@@ -2,70 +2,86 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour
 {
-    // Array of scene names to choose from
-    public string[] sceneNames;
-    private string previousScene;
+    public List<string> listAction;
+    public List<string> listEvent;
+    private static List<string> tempAction;
+    private static List<string> tempEvent;
+    private static string previousScene;
+    private static string selectedActionRoom;
+    private static string selectedEventRoom;
+    private static int roomsVisited = 0;
+    private static int bossCounter = 0;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Start()
     {
-        if (other.CompareTag("Player"))
+        if (tempAction == null || tempEvent == null)
         {
-            // Save player state
-            SavePlayerState();
-
-            // Load a random scene
-            LoadRandomScene();
+            InitializeLists();
         }
     }
 
     private void SavePlayerState()
     {
         // TODO: Implement saving player state
-        // This could involve saving health, position, inventory, etc.
         Debug.Log("Saving player state...");
     }
 
-    private void LoadRandomScene()
+    public void ShowRoomOptions()
     {
-        if (sceneNames.Length > 1) // Ensure there are at least two scenes to choose from
-        {
-            string randomScene;
-            do
-            {
-                // Choose a random scene from the array
-                randomScene = sceneNames[Random.Range(0, sceneNames.Length)];
-            } while (randomScene == previousScene);
+        roomsVisited++;
 
-            // Set the previous scene to the current one before loading the new scene
-            previousScene = randomScene;
-
-            // Load the chosen scene
-            SceneManager.LoadScene(randomScene);
-        }
-        else if (sceneNames.Length == 1)
+        if (roomsVisited % 5 == 0)
         {
-            // If there is only one scene, just load it
-            previousScene = sceneNames[0];
-            SceneManager.LoadScene(previousScene);
+            LoadBossRoom();
         }
         else
         {
-            Debug.LogError("No scenes assigned to the RandomSceneLoader!");
+            if (tempAction.Count == 0 || tempEvent.Count == 0)
+            {
+                InitializeLists();
+            }
+            selectedActionRoom = tempAction[Random.Range(0, tempAction.Count)];
+            selectedEventRoom = tempEvent[Random.Range(0, tempEvent.Count)];
+            SceneManager.LoadScene("Option_Screen");
         }
     }
 
-    public void StartBtn_Click()
+    private void LoadBossRoom()
     {
-        SceneManager.LoadScene("Room_Start");
+        string bossRoomName = (bossCounter % 2 == 0) ? "Room_Boss" : "Room_Boss2";
+        bossCounter++;
+        SavePlayerState();
+        previousScene = bossRoomName;
+        SceneManager.LoadScene(bossRoomName);
     }
-    public void RestartBtn_Click()
+
+    public void LoadSelectedScene(bool isAction)
     {
-        SceneManager.LoadScene("Room_Start");
-    }public void MainMenuBtn_Click()
+        string sceneName = isAction ? selectedActionRoom : selectedEventRoom;
+        List<string> list = isAction ? tempAction : tempEvent;
+        SavePlayerState();
+        list.Remove(sceneName);
+        previousScene = sceneName;
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private void InitializeLists()
     {
-        SceneManager.LoadScene("MainMenu_Screen");
+        tempAction = new List<string>(listAction);
+        tempEvent = new List<string>(listEvent);
+    }
+
+    public void OnActionOptionClicked()
+    {
+        LoadSelectedScene(true);
+    }
+
+    public void OnEventOptionClicked()
+    {
+        LoadSelectedScene(false);
     }
 }

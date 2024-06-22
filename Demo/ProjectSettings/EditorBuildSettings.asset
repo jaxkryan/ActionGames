@@ -21,6 +21,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Room_3.unity
     guid: a171c0fb5f8aa1a4cad5ccdf22f698aa
   - enabled: 1
+    path: Assets/Scenes/Room_4.unity
+    guid: 1743f6bafb7f25a498379d07b614d9a1
+  - enabled: 1
     path: Assets/Scenes/MainMenu_Screen.unity
     guid: 47d035f4cb7682448b47da77a02157d9
+  - enabled: 1
+    path: Assets/Scenes/GameOver_Screen.unity
+    guid: 5ac5058914b65db4bb97809dfb78bac3
+  - enabled: 1
+    path: Assets/Scenes/Option_Screen.unity
+    guid: 386f63cac2eff5e44a76e29ec6b1ee96
+  - enabled: 1
+    path: Assets/Scenes/Room_Boss.unity
+    guid: 977234dfbfa11e24c95ec36bc10e8784
+  - enabled: 1
+    path: Assets/Scenes/Room_Boss2.unity
+    guid: c870c3da2c3e4dc42b85eaec861e1dab
   m_configObjects: {}
