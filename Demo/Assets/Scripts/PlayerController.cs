@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -111,8 +112,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -120,30 +119,36 @@ public class PlayerController : MonoBehaviour
         touchingDirection = GetComponent<TouchingDirection>();
         damageable = GetComponent<Damageable>();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        if (isDashing) { return; }
     }
 
     private void FixedUpdate()
     {
-        if(!damageable.LockVelocity)
+        if (isDashing) { return; }
+        if (!damageable.LockVelocity)
             rb.velocity = new Vector2(moveInput.x * CurrentSpeed, rb.velocity.y);
-        
+
         animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
+
+        // Update running state based on movement
+        if (moveInput == Vector2.zero)
+        {
+            IsRunning = false;
+        }
     }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
 
-        if(IsAlive)
+        if (IsAlive)
         {
             IsMoving = moveInput != Vector2.zero;
             SetFacingDirection(moveInput);
@@ -178,6 +183,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.started && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -190,6 +203,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
     }
+
     public void OnJump(InputAction.CallbackContext context)
     {
         //TODO: cant jump when died
@@ -198,5 +212,42 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger(AnimationStrings.jumping);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
         }
+    }
+
+    [Header("Dash properties")]
+    private bool canDash = true;
+    private bool isDashing;
+    public float dashingPower = 24f;
+    public float dashingTime = 0.2f;
+    public float dashingCd = 1f;
+    [SerializeField] private TrailRenderer trailRenderer;
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        // Determine dash direction
+        float dashDirection = 0f;
+        if (moveInput.x != 0)
+        {
+            dashDirection = moveInput.x;
+        }
+        else
+        {
+            dashDirection = isFacingRight ? -1 : 1; // Dash backward if no input
+        }
+
+        rb.velocity = new Vector2(dashDirection * dashingPower, 0f);
+        trailRenderer.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        trailRenderer.emitting = false;
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        IsRunning = true; // Automatically enter run mode after dashing
+        yield return new WaitForSeconds(dashingCd);
+        canDash = true;
     }
 }
