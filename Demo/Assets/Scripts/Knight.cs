@@ -7,6 +7,7 @@ using UnityEngine;
 public class Knight : MonoBehaviour
 {
     public DetectionZone attackZone;
+    public DetectionZone cliffDetectionZone;
     public float walkStopRate = 0.05f;
     Animator animator;
     Damageable damageable;
@@ -52,6 +53,10 @@ public class Knight : MonoBehaviour
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
+        if (AttackCooldown > 0 ) { 
+            AttackCooldown -= Time.deltaTime; 
+        }
+        
     }
 
     public bool _hasTarget = false;
@@ -98,11 +103,26 @@ public class Knight : MonoBehaviour
             return animator.GetBool(AnimationStrings.canMove);
         }
     }
+
+    public float AttackCooldown { get {
+            return animator.GetFloat(AnimationStrings.AttackCooldown);
+        } private set
+        {
+            animator.SetFloat(AnimationStrings.AttackCooldown, Mathf.Max(0, value));
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-
+    public void OnCliffDetected()
+    {
+        if (touchingDirection.IsGround)
+        {
+            FlipDirection();
+        }
+    }
 }
