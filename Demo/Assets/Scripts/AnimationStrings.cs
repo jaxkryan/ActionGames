@@ -1,5 +1,6 @@
 ﻿internal class AnimationStrings
 {
+    internal static string AttackCooldown = "attackCooldown";
     internal static string isMoving = "isMoving";
     internal static string isRunning = "isRunning";
     internal static string attacking = "attack";
