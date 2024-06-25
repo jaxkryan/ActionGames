@@ -3635,11 +3635,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4086048556563056920, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.06
+      value: 21.09
       objectReference: {fileID: 0}
     - target: {fileID: 4086048556563056920, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7
+      value: -4.39
       objectReference: {fileID: 0}
     - target: {fileID: 4086048556563056920, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3757,11 +3757,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4086048556563056920, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.976323
+      value: -1.44
       objectReference: {fileID: 0}
     - target: {fileID: 4086048556563056920, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6446923
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 4086048556563056920, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3836,6 +3836,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2134917337452429870, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
+      propertyPath: m_Size.x
+      value: 3.0032353
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134917337452429870, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.16052932
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807309342547166707, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6402979
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807309342547166707, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.17985106
+      objectReference: {fileID: 0}
     - target: {fileID: 4591734722486170938, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
       propertyPath: m_Name
       value: KnightEnemy
@@ -3883,6 +3899,10 @@ PrefabInstance:
     - target: {fileID: 6175207653020644567, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503429951786410621, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
+      propertyPath: walkSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
