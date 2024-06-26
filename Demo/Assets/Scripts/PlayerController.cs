@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirection), typeof(Damageable))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirection))]
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public float jumpImpulse = 10f;
     public float airWalkSpeed = 3f;
     TouchingDirection touchingDirection;
-    Damageable damageable;
     public bool canMove
     {
         get
@@ -21,15 +20,6 @@ public class PlayerController : MonoBehaviour
             return animator.GetBool(AnimationStrings.canMove);
         }
     }
-
-    public bool IsAlive
-    {
-        get
-        {
-            return animator.GetBool(AnimationStrings.isAlive);
-        }
-    }
-
     public float CurrentSpeed
     {
         get
@@ -117,46 +107,29 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<TouchingDirection>();
-        damageable = GetComponent<Damageable>();
     }
-
+    // Start is called before the first frame update
     void Start()
     {
+
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if (isDashing) { return; }
+
     }
 
     private void FixedUpdate()
     {
-        if (isDashing) { return; }
-        if (!damageable.LockVelocity)
-            rb.velocity = new Vector2(moveInput.x * CurrentSpeed, rb.velocity.y);
-
+        rb.velocity = new Vector2(moveInput.x * CurrentSpeed, rb.velocity.y);
         animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
-
-        // Update running state based on movement
-        if (moveInput == Vector2.zero)
-        {
-            IsRunning = false;
-        }
     }
-
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-
-        if (IsAlive)
-        {
-            IsMoving = moveInput != Vector2.zero;
-            SetFacingDirection(moveInput);
-        }
-        else
-        {
-            IsMoving = false;
-        }
+        IsMoving = moveInput != Vector2.zero;
+        SetFacingDirection(moveInput);
     }
 
     private void SetFacingDirection(Vector2 moveInput)
@@ -183,25 +156,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.started && canDash)
-        {
-            StartCoroutine(Dash());
-        }
-    }
-
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.attacking);
         }
-    }
-
-    public void OnHit(int damage, Vector2 knockback)
-    {
-        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -223,7 +183,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TrailRenderer trailRenderer;
 
     private IEnumerator Dash()
-    {
+    {   
         canDash = false;
         isDashing = true;
         float originalGravity = rb.gravityScale;
