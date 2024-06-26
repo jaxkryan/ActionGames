@@ -31,5 +31,21 @@ public class DamageZone : MonoBehaviour
                 }
             }
         }
+        else {
+            Damageable damageable = other.GetComponent<Damageable>();
+            if (damageable != null && sendPlayerToOriginalLocation)
+            {
+                // Calculate knockback direction
+                Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
+
+                // Apply knockback force
+                Vector2 knockback = knockbackDirection * knockbackForce;
+
+                // Use Hit method with damage amount and calculated knockback
+                damageable.Hit(1000, knockback);
+
+               
+            }
+        }
     }
 }
