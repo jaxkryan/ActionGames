@@ -69,7 +69,7 @@ public class Knight : MonoBehaviour
         }
         if(!damageable.LockVelocity)
         {
-            if (CanMove)
+            if (CanMove && touchingDirection.IsGround)
             {
                 rb.velocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.velocity.y);
             }
