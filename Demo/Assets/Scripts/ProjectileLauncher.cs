@@ -13,7 +13,7 @@ public class ProjectileLauncher : MonoBehaviour
         Vector3 origScale = projectile.transform.localScale;
 
         projectile.transform.localScale = new Vector3(
-            origScale.x * transform.localScale.x > 0 ? 1 : -1,
+            origScale.x * transform.localScale.x > 0 ? 0.1f : -0.1f,
             origScale.y,
             origScale.z
             );
