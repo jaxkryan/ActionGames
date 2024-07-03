@@ -230,7 +230,6 @@ GameObject:
   - component: {fileID: 8683868161619580531}
   - component: {fileID: 8839137606578484676}
   - component: {fileID: 4814759533604263766}
-  - component: {fileID: 2043088936735204808}
   - component: {fileID: 8485756263172064667}
   - component: {fileID: 5406483318001743203}
   - component: {fileID: 2878549844048896770}
@@ -635,23 +634,6 @@ MonoBehaviour:
   _isGround: 1
   _isOnWall: 0
   _isOnCelling: 0
---- !u!114 &2043088936735204808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670572082697007339}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15b13fa5f0f8e5949b0bc8094b9d04e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackZone: {fileID: 0}
-  cliffDetectionZone: {fileID: 0}
-  walkStopRate: 0.6
-  walkSpeed: 3
-  _hasTarget: 0
 --- !u!114 &8485756263172064667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,6 +664,7 @@ MonoBehaviour:
   damageableDeath:
     m_PersistentCalls:
       m_Calls: []
+  dropItem: {fileID: 0}
   _maxHealth: 100
   _health: 100
   _isAlive: 1
@@ -814,7 +797,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 8847997969909377436, guid: 2bfb1732017909e4cbfa165459b1adc0, type: 3}
   launchPoint: {fileID: 6535070933589624269}
-  disappearedTime: 0
 --- !u!114 &7908228174054581180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,4 +990,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 8847997969909377436, guid: 2bfb1732017909e4cbfa165459b1adc0, type: 3}
   launchPoint: {fileID: 6535070933589624269}
-  disappearedTime: 1

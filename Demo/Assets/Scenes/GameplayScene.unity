@@ -496,7 +496,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.080204, y: -0.06127, z: -10.000715}
+  m_LocalPosition: {x: 7.9622526, y: 0.057519987, z: -10.000715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4060,6 +4060,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 154405474496553711, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
+      propertyPath: _health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 154405474496553711, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 2169320341939109797, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
+    - target: {fileID: 154405474496553711, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
+      propertyPath: _maxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 154405474496553711, guid: 5ea0cd0f740626640b66130558b1eff0, type: 3}
       propertyPath: damageableHit.m_PersistentCalls.m_Calls.Array.size
       value: 1

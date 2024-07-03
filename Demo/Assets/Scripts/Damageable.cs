@@ -6,6 +6,7 @@ public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
     public UnityEvent damageableDeath;
+    public GameObject dropItem;
     Animator animator;
 
     [SerializeField]
@@ -61,6 +62,7 @@ public class Damageable : MonoBehaviour
     public bool IsAlive { 
         get {
             return _isAlive;
+
         }
         set 
         {
@@ -70,6 +72,7 @@ public class Damageable : MonoBehaviour
 
             if(value == false)
             {
+                DropWhenDeath();
                 damageableDeath.Invoke();
             }
         } 
@@ -134,5 +137,12 @@ public class Damageable : MonoBehaviour
             return true;
         }
         return false;
+    }
+    private void DropWhenDeath()
+    {
+        if (dropItem != null)
+        {
+            Instantiate(dropItem, transform.position, Quaternion.identity);
+        }
     }
 }
