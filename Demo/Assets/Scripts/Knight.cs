@@ -49,7 +49,6 @@ public class Knight : MonoBehaviour
         damageable = GetComponent<Damageable>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
@@ -63,6 +62,12 @@ public class Knight : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //if (damageable.LockVelocity) // Freeze all movement if stunned
+        //{
+        //    rb.velocity = Vector2.zero; // Set velocity to zero
+        //    return;
+        //}
+
         if (touchingDirection.IsOnWall && touchingDirection.IsGround)
         {
             FlipDirection();
