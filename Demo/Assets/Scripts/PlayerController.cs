@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<TouchingDirection>();
         damageable = GetComponent<Damageable>();
+       // lockAttackCollider = GetComponent<CircleCollider2D>();
     }
 
     void Start()
@@ -214,6 +215,31 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger(AnimationStrings.castFireTrigger);
         }
     }
+
+    public void OnLockAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            animator.SetTrigger(AnimationStrings.lockAttackTrigger);
+            //PerformLockAttack();
+        }
+    }
+
+    private float stunDuration = 2f;
+    public LayerMask enemyLayers;
+
+    //private void PerformLockAttack()
+    //{
+    //    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(lockAttackCollider.transform.position, lockAttackCollider.radius, enemyLayers);
+    //    foreach (Collider2D enemy in hitEnemies)
+    //    {
+    //        Damageable enemyDamageable = enemy.GetComponent<Damageable>();
+    //        if (enemyDamageable != null)
+    //        {
+    //            enemyDamageable.Stun(stunDuration);
+    //        }
+    //    }
+    //}
 
     public void OnHit(int damage, Vector2 knockback)
     {
