@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawnerController : MonoBehaviour
-
 {
     public List<GameObject> enemyPrefabs; // List of enemy prefabs to spawn from
     public List<Transform> spawnPoints; // List of spawn points
     public int enemiesPerWave = 5; // Number of enemies per wave
     public int spawnPointsPerWave = 2; // Number of spawn points to use per wave
     public float timeBetweenWaves = 5f; // Time between waves
+    public GameObject summonEffectPrefab; // Summon effect prefab
+    public float summonEffectDuration = 1f; // Duration of the summon effect animation
 
     private int waveNumber = 1; // Current wave number
     private int activeEnemies = 0; // Active enemy count
@@ -30,7 +31,7 @@ public class EnemySpawnerController : MonoBehaviour
             {
                 for (int j = 0; j < enemiesPerWave; j++)
                 {
-                    SpawnEnemy(selectedSpawnPoints[i]);
+                    StartCoroutine(SpawnEnemyWithEffect(selectedSpawnPoints[i]));
                 }
             }
 
@@ -41,6 +42,21 @@ public class EnemySpawnerController : MonoBehaviour
 
             waveNumber++;
         }
+    }
+
+    IEnumerator SpawnEnemyWithEffect(Transform spawnPoint)
+    {
+        // Instantiate the summon effect
+        GameObject summonEffect = Instantiate(summonEffectPrefab, spawnPoint.position, spawnPoint.rotation);
+
+        // Wait for the summon effect duration
+        yield return new WaitForSeconds(summonEffectDuration);
+
+        // Destroy the summon effect
+        Destroy(summonEffect);
+
+        // Instantiate the enemy
+        SpawnEnemy(spawnPoint);
     }
 
     void SpawnEnemy(Transform spawnPoint)
@@ -97,5 +113,3 @@ public class EnemyTracker : MonoBehaviour
         }
     }
 }
-
-

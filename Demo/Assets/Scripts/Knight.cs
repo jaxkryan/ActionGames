@@ -48,7 +48,10 @@ public class Knight : MonoBehaviour
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
     }
+    void Start()
+    {
 
+    }
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
@@ -115,12 +118,6 @@ public class Knight : MonoBehaviour
         {
             animator.SetFloat(AnimationStrings.AttackCooldown, Mathf.Max(0, value));
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     public void OnCliffDetected()
