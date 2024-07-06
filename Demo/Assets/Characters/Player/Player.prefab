@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3997702181528854564}
   - component: {fileID: 2285382908769813059}
+  - component: {fileID: 5454115644323954091}
   m_Layer: 9
   m_Name: LockAttack
   m_TagString: Untagged
@@ -61,12 +62,27 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.21137667, y: 0}
+  m_Offset: {x: -0.052180767, y: 0}
   serializedVersion: 2
-  m_Radius: 0.71137667
+  m_Radius: 0.87057257
+--- !u!114 &5454115644323954091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495384378693459533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47923bf511fa0f949a78598a5d4fa296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 1
+  knockback: {x: 0, y: 0}
+  stunDuration: 2
 --- !u!1 &758923863101330094
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +442,9 @@ MonoBehaviour:
   airWalkSpeed: 3
   _isMoving: 0
   _isRunning: 0
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
   dashingPower: 12
   dashingTime: 0.2
   dashingCd: 1
@@ -613,13 +632,13 @@ MonoBehaviour:
     m_ActionName: Player/Cast Fire[/Keyboard/1]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1607725449858402806}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnLockAttack
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -748,13 +767,15 @@ MonoBehaviour:
   damageableDeath:
     m_PersistentCalls:
       m_Calls: []
-  dropItem: {fileID: 0}
+  dropItem: {fileID: 2169320341939109797, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
+  isStunned: 0
   stunDuration: 0
   _maxHealth: 100
   _health: 100
   _isAlive: 1
   isInvincible: 0
   invincibilityTime: 1
+  _isStun: 0
 --- !u!96 &5406483318001743203
 TrailRenderer:
   serializedVersion: 3
