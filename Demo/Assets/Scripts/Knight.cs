@@ -48,8 +48,10 @@ public class Knight : MonoBehaviour
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
     }
+    void Start()
+    {
 
-    // Update is called once per frame
+    }
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
@@ -63,6 +65,12 @@ public class Knight : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //if (damageable.LockVelocity) // Freeze all movement if stunned
+        //{
+        //    rb.velocity = Vector2.zero; // Set velocity to zero
+        //    return;
+        //}
+
         if (touchingDirection.IsOnWall && touchingDirection.IsGround)
         {
             FlipDirection();
@@ -110,12 +118,6 @@ public class Knight : MonoBehaviour
         {
             animator.SetFloat(AnimationStrings.AttackCooldown, Mathf.Max(0, value));
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     public void OnCliffDetected()

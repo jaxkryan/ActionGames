@@ -18,6 +18,7 @@ public class Attack : MonoBehaviour
 
             if (gotHit) 
                 Debug.Log(collision.name + " hit for " + attackDamage);
+            damageable.IsStun = false;
         }
     }
 }

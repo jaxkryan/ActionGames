@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
 public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
     public UnityEvent damageableDeath;
-    public UnityEvent<int, int> healthChanged;
 
+    public UnityEvent<int, int> healthChanged;
+    public GameObject dropItem;
     Animator animator;
+
+    public bool isStunned = false;
+    public float stunDuration = 2f;
+    private float stunEndTime;
 
     [SerializeField]
     private int _maxHealth = 100;
@@ -36,6 +42,7 @@ public class Damageable : MonoBehaviour
         set
         {
             _health = value;
+
             healthChanged?.Invoke(_health, MaxHealth);
             if(_health <= 0)
             {
@@ -49,33 +56,60 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     private bool isInvincible = false;
 
-    public bool IsHit { get 
+    public bool IsHit
+    {
+        get
         {
             return animator.GetBool(AnimationStrings.isHit);
         }
-        private set {
-        animator.SetBool(AnimationStrings.isHit, value);
-        } 
+        private set
+        {
+            animator.SetBool(AnimationStrings.isHit, value);
+        }
     }
 
     private float timeSinceHit = 0;
     public float invincibilityTime = 0.25f;
-
-    public bool IsAlive { 
-        get {
+    [SerializeField]
+    private bool _isStun = false;
+    public bool IsStun
+    {
+        get
+        {
+            return _isStun;
+        }
+        set
+        {
+            _isStun = value;
+            animator.SetBool(AnimationStrings.isStun, value);
+            if (_isStun)
+            {
+                if (IsAlive)
+                {
+                    LockVelocity = true;
+                    stunEndTime = Time.time + stunDuration;
+                    isStunned = true;
+                    Debug.Log("Stunned for duration: " + stunDuration + ", stun end time: " + stunEndTime);
+                }
+            }
+        }
+    }
+    public bool IsAlive
+    {
+        get
+        {
             return _isAlive;
         }
-        set 
+        set
         {
             _isAlive = value;
             animator.SetBool(AnimationStrings.isAlive, value);
-            Debug.Log("IsAlive set " + value);
-
-            if(value == false)
+            if (value == false)
             {
+                DropWhenDeath();
                 damageableDeath.Invoke();
             }
-        } 
+        }
     }
     public bool LockVelocity
     {
@@ -86,8 +120,10 @@ public class Damageable : MonoBehaviour
         set
         {
             animator.SetBool(AnimationStrings.lockVelocity, value);
+            Debug.Log("LockVelocity set to: " + value);
         }
     }
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -95,7 +131,7 @@ public class Damageable : MonoBehaviour
 
     private void Update()
     {
-        if(isInvincible)
+        if (isInvincible)
         {
             if (timeSinceHit > invincibilityTime)
             {
@@ -105,11 +141,20 @@ public class Damageable : MonoBehaviour
 
             timeSinceHit += Time.deltaTime;
         }
+
+        if (isStunned && Time.time >= stunEndTime)
+        {
+            isStunned = false;
+            LockVelocity = false;
+            animator.SetBool(AnimationStrings.isStun, false);
+            Debug.Log("Stun ended. LockVelocity set to false.");
+        }
+        else Debug.Log("No stun");
     }
 
     public bool Hit(int damage, Vector2 knockback)
     {
-        if(IsAlive && !isInvincible)
+        if (IsAlive && !isInvincible)
         {
             Health -= damage;
             isInvincible = true;
@@ -119,7 +164,7 @@ public class Damageable : MonoBehaviour
             damageableHit?.Invoke(damage, knockback);
             CharacterEvents.characterDamaged.Invoke(gameObject, damage);
 
-
+          //  Debug.Log("Hit! Health: " + Health);
             return true;
         }
 
@@ -128,7 +173,7 @@ public class Damageable : MonoBehaviour
 
     public bool Heal(int healthRestore)
     {
-        if(IsAlive && Health < MaxHealth)
+        if (IsAlive && Health < MaxHealth)
         {
             int maxHeal = Mathf.Max(MaxHealth - Health, 0);
             int actualHeal = Mathf.Min(maxHeal, healthRestore);
@@ -137,5 +182,13 @@ public class Damageable : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void DropWhenDeath()
+    {
+        if (dropItem != null)
+        {
+            Instantiate(dropItem, transform.position, Quaternion.identity);
+        }
     }
 }
