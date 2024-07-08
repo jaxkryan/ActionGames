@@ -8,22 +8,23 @@ public class BossBattleManager : MonoBehaviour
     public Transform bossSpawnPoint;
     public GameObject bossPrefab;
     public Slider bossHealthBar;
-
     public CinemachineVirtualCamera playerFollowCamera;
     public CinemachineVirtualCamera bossRoomCamera;
+    public Canvas bossUICanvas;
 
     private GameObject currentBoss;
     private Damageable bossDamageable;
 
     private void Start()
     {
-        bossHealthBar.enabled = false;
+        bossUICanvas.gameObject.SetActive(false);
         rightBorderExit.SetActive(true);
         SwitchToPlayerCamera();
     }
 
     public void StartBossBattle()
     {
+        bossUICanvas.gameObject.SetActive(true);
         SpawnBoss();
         SwitchToBossRoomCamera();
     }
@@ -32,10 +33,8 @@ public class BossBattleManager : MonoBehaviour
     {
         currentBoss = Instantiate(bossPrefab, bossSpawnPoint.position, Quaternion.identity);
         bossDamageable = currentBoss.GetComponent<Damageable>();
-        bossHealthBar.enabled = true;
         bossHealthBar.maxValue = bossDamageable.MaxHealth;
         bossHealthBar.value = bossDamageable.Health;
-
         bossDamageable.damageableDeath.AddListener(OnBossDeath);
         bossDamageable.damageableHit.AddListener(UpdateBossHealthBar);
     }
@@ -50,6 +49,7 @@ public class BossBattleManager : MonoBehaviour
         rightBorderExit.SetActive(false);
         SwitchToPlayerCamera();
         Destroy(currentBoss);
+        bossUICanvas.gameObject.SetActive(false);
     }
 
     private void SwitchToBossRoomCamera()

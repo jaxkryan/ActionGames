@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -21,4 +17,27 @@ public class UIController : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu_Screen");
     }
+
+    public void OptionsBtn_Click()
+    {
+        if (SettingsManager.Instance != null)
+        {
+            SettingsManager.Instance.OpenSettings();
+        }
+    }
+
+    public void ExitBtn_Click()
+    {
+        Application.Quit();
+    }
+
+    public void CloseSettingsBtn_Click()
+    {
+        if (SettingsManager.Instance != null)
+        {
+            SettingsManager.Instance.CloseSettings();
+        }
+    }
+
+
 }
