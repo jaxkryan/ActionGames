@@ -58,8 +58,6 @@ MonoBehaviour:
   - {fileID: 7642259493318777703}
   - {fileID: 7981996070969771518}
   - {fileID: 6670779672066762973}
-  - {fileID: 808438046873898724}
-  - {fileID: 8828933712621694645}
   enemiesPerWave: 1
   spawnPointsPerWave: 2
   timeBetweenWaves: 5
