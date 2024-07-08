@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 3121177932437059774}
   - component: {fileID: 366460629548117337}
   m_Layer: 8
-  m_Name: FlyingEye
+  m_Name: Boss_FlyingEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,15 +268,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  dropItem: {fileID: 2169320341939109797, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
-  isStunned: 0
-  stunDuration: 2
-  _maxHealth: 50
-  _health: 50
+  _maxHealth: 200
+  _health: 200
   _isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
-  _isStun: 0
 --- !u!95 &3121177932437059774
 Animator:
   serializedVersion: 5
@@ -310,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fe6d1e644b1964fbc0cbc05e3c67cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flightSpeed: 2
+  flightSpeed: 3
   waypointReachedDistance: 0.1
   biteDetectionZone: {fileID: 1904720632471160977}
   deathCollider: {fileID: 4081541737391274040}
