@@ -18,26 +18,80 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene("MainMenu_Screen");
     }
 
-    public void OptionsBtn_Click()
+    private Canvas settingsCanvas;
+    private bool isPaused = false;
+
+    void Start()
     {
-        if (SettingsManager.Instance != null)
+        settingsCanvas = GetComponent<Canvas>();
+        SetupInitialState();
+    }
+
+    void SetupInitialState()
+    {
+        // Activate the canvas itself
+        settingsCanvas.gameObject.SetActive(true);
+
+        // Deactivate all immediate child objects
+        foreach (Transform child in transform)
         {
-            SettingsManager.Instance.OpenSettings();
+            child.gameObject.SetActive(false);
         }
     }
 
-    public void ExitBtn_Click()
+    void Update()
     {
-        Application.Quit();
-    }
-
-    public void CloseSettingsBtn_Click()
-    {
-        if (SettingsManager.Instance != null)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SettingsManager.Instance.CloseSettings();
+            TogglePause();
         }
     }
 
+    void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        // Activate/deactivate all child objects based on pause state
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(isPaused);
+        }
+
+        Time.timeScale = isPaused ? 0 : 1;
+    }
+
+    public void OpenSettings()
+    {
+        if (settingsCanvas != null)
+        {
+            settingsCanvas.gameObject.SetActive(true);
+        }
+        Time.timeScale = 0;
+        isPaused = true;
+    }
+
+    public void CloseSettings()
+    {
+        if (settingsCanvas != null)
+        {
+            settingsCanvas.gameObject.SetActive(false);
+        }
+        Time.timeScale = 1;
+        isPaused = false;
+    }
+
+    public void ResumeGame()
+    {
+        CloseSettings();
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+    }
 
 }
