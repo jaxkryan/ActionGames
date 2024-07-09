@@ -147,6 +147,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (stopActionWhenDialogue()) return;
         moveInput = context.ReadValue<Vector2>();
 
         if (IsAlive)
@@ -174,6 +175,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext context)
     {
+        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             IsRunning = true;
@@ -186,14 +188,24 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        if(stopActionWhenDialogue()) return;
         if (context.started && canDash)
         {
             StartCoroutine(Dash());
         }
     }
-
+    public GameObject dialoguePanel;
+    private bool stopActionWhenDialogue()
+    {
+        if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
+        {
+            return true; 
+        }
+        return false;
+    }
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.attacking);
@@ -202,6 +214,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnRangedAttack(InputAction.CallbackContext context)
     {
+        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.rangedAttackTrigger);
@@ -210,6 +223,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnCastFire(InputAction.CallbackContext context)
     {
+        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.castFireTrigger);
@@ -218,6 +232,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnLockAttack(InputAction.CallbackContext context)
     {
+        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.lockAttackTrigger);
@@ -248,6 +263,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (stopActionWhenDialogue()) return;
         //TODO: cant jump when died
         if (context.started && touchingDirection.IsGround && canMove)
         {
