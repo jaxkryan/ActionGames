@@ -65,7 +65,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16052932, y: -0.50465274}
+  m_Offset: {x: 0.44367933, y: -0.50465274}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.0032353, y: 2.0093079}
+  m_Size: {x: 3.5695353, y: 2.0093079}
   m_EdgeRadius: 0
 --- !u!114 &477284626354402339
 MonoBehaviour:
@@ -187,7 +187,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.17985106}
+  m_Offset: {x: 0, y: 0.24523371}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -198,7 +198,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.6402979}
+  m_Size: {x: 1, y: 0.5095326}
   m_EdgeRadius: 0
 --- !u!1 &4591734722486170938
 GameObject:
@@ -217,8 +217,8 @@ GameObject:
   - component: {fileID: 6503429951786410621}
   - component: {fileID: 154405474496553711}
   m_Layer: 8
-  m_Name: KnightEnemy
-  m_TagString: Enemy
+  m_Name: Boss_KnightEnemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,7 +326,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -421,7 +421,7 @@ MonoBehaviour:
   attackZone: {fileID: 477284626354402339}
   cliffDetectionZone: {fileID: 2918008427032465300}
   walkStopRate: 0.05
-  walkSpeed: 2
+  walkSpeed: 6
   _hasTarget: 0
 --- !u!114 &154405474496553711
 MonoBehaviour:
@@ -437,27 +437,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageableHit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6503429951786410621}
-        m_TargetAssemblyTypeName: Knight, Assembly-CSharp
-        m_MethodName: OnHit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   damageableDeath:
     m_PersistentCalls:
       m_Calls: []
-  dropItem: {fileID: 2169320341939109797, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
-  isStunned: 1
-  stunDuration: 1
-  _maxHealth: 100
-  _health: 100
+  dropItem: {fileID: 0}
+  isStunned: 0
+  stunDuration: 2
+  _maxHealth: 300
+  _health: 300
   _isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
