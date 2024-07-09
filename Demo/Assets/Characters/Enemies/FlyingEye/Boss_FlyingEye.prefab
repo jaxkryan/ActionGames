@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 366460629548117337}
   m_Layer: 8
   m_Name: Boss_FlyingEye
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,11 +268,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  healthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  dropItem: {fileID: 0}
+  isStunned: 0
+  stunDuration: 2
   _maxHealth: 200
   _health: 200
   _isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
+  _isStun: 0
 --- !u!95 &3121177932437059774
 Animator:
   serializedVersion: 5

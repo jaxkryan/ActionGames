@@ -14,10 +14,25 @@ public class EnemySpawnerController : MonoBehaviour
 
     private int waveNumber = 1; // Current wave number
     private int activeEnemies = 0; // Active enemy count
+    private Coroutine spawnCoroutine; // Coroutine reference for spawning waves
 
-    void Start()
+    void OnEnable()
     {
-        StartCoroutine(SpawnWaves()); // Start spawning waves
+        // Start spawning waves when object is enabled
+        if (spawnCoroutine == null)
+        {
+            spawnCoroutine = StartCoroutine(SpawnWaves());
+        }
+    }
+
+    void OnDisable()
+    {
+        // Stop spawning waves when object is disabled
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
     }
 
     IEnumerator SpawnWaves()
