@@ -176,11 +176,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3051854733148924673, guid: b3c71407598e8d349a4b605303bcd91a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.97
+      value: 15.24
       objectReference: {fileID: 0}
     - target: {fileID: 3051854733148924673, guid: b3c71407598e8d349a4b605303bcd91a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.01
+      value: 1.95
       objectReference: {fileID: 0}
     - target: {fileID: 5772186393172265414, guid: b3c71407598e8d349a4b605303bcd91a, type: 3}
       propertyPath: spawnPoints.Array.data[4]
@@ -2154,9 +2154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 1451308203}
   dialogueText: {fileID: 1344684000}
-  dialogue:
-  - Hi ther
-  - u ned any hakp?
   nextButton: {fileID: 287057176}
   wordSpeed: 0.05
   playerIsClose: 0
