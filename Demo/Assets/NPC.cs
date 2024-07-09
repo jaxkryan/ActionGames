@@ -10,6 +10,7 @@ public class NPC : MonoBehaviour
     public List<string[]> dialogueSets;  // List of dialogue sets
     private string[] currentDialogue;
     private int index;
+    private Coroutine co;
 
     public GameObject nextButton;
     public float wordSpeed;
@@ -18,38 +19,53 @@ public class NPC : MonoBehaviour
     // EnemySpawnPoint reference
     public GameObject[] enemySpawnPoint;
 
+    private bool hasShownInitialDialogue = false;  // Flag to track initial dialogue display
+
     // Start is called before the first frame update
     void Start()
     {
         dialogueSets = new List<string[]>();  // Initialize the list
-        // Example of adding dialogue sets
-        dialogueSets.Add(new string[] { "Hello there!", "How are you?", "Nice weather today." });
-        dialogueSets.Add(new string[] { "Greetings!", "What brings you here?", "Take care!" });
-        // Add more dialogue sets as needed
+        dialogueSets.Add(new string[] { "Here is Borderdeath", "And you are a lost soul", "Just go ahead", "And your next life will be shown" });
+        dialogueSets.Add(new string[] { "Just go ahead", "And find the truth yourself" });
+        dialogueSets.Add(new string[] { "How many times i meet you?", "Just wanna say good luck on ur journey to ur next life" });
+        dialogueSets.Add(new string[] { "Sometime just sit down and chill", "U have plenty of time here anyway"});
 
-        // Find EnemySpawnPoint by tag
         enemySpawnPoint = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
         if (enemySpawnPoint == null)
         {
             Debug.LogError("EnemySpawnPoint not found! Make sure it's tagged correctly.");
         }
+
+        // Check if initial dialogue has been shown
+        if (!PlayerPrefs.HasKey("InitialDialogueShown"))
+        {
+            PlayerPrefs.SetInt("InitialDialogueShown", 0);
+        }
+        else
+        {
+            hasShownInitialDialogue = PlayerPrefs.GetInt("InitialDialogueShown") == 1;
+        }
     }
 
     IEnumerator Typing()
     {
+        Debug.Log("previous: " + currentDialogue[index]);
+
         foreach (char letter in currentDialogue[index].ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(wordSpeed);
+            yield return new WaitForSecondsRealtime(wordSpeed * Time.timeScale);
         }
+
+        Debug.Log("current: " + dialogueText.text);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
         {
-            if (dialoguePanel.activeInHierarchy)
+            if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
             {
                 EndDialogue();
             }
@@ -58,11 +74,21 @@ public class NPC : MonoBehaviour
                 StartDialogue();
             }
         }
-        if (dialogueText.text == currentDialogue[index])
+
+        // Check if dialogueText and currentDialogue are not null before accessing them
+        if (dialogueText != null && currentDialogue != null && index < currentDialogue.Length)
         {
-            nextButton.SetActive(true);
+            if (dialogueText.text == currentDialogue[index])
+            {
+                nextButton.SetActive(true);
+            }
+            else
+            {
+                nextButton.SetActive(false);
+            }
         }
     }
+
 
     public void NextLine()
     {
@@ -71,7 +97,7 @@ public class NPC : MonoBehaviour
         {
             index++;
             dialogueText.text = "";
-            StartCoroutine(Typing());
+            co = StartCoroutine(Typing());
         }
         else
         {
@@ -90,45 +116,89 @@ public class NPC : MonoBehaviour
             }
         }
 
-        // Select random dialogue set
-        SelectRandomDialogue();
+        // Select dialogue set based on whether initial dialogue has been shown
+        if (!hasShownInitialDialogue)
+        {
+            currentDialogue = dialogueSets[0];  // Show initial dialogue set
+            PlayerPrefs.SetInt("InitialDialogueShown", 1);  // Mark initial dialogue as shown
+        }
+        else
+        {
+            SelectRandomDialogue();  // Show random dialogue set
+        }
+
         dialoguePanel.SetActive(true);
         StartCoroutine(Typing());
+        
     }
 
     private void EndDialogue()
     {
-        // Enable EnemySpawnPoint
+        // Enable EnemySpawnPoint if they exist and are not destroyed
         if (enemySpawnPoint != null)
         {
             foreach (GameObject e in enemySpawnPoint)
             {
-                e.SetActive(true);
+                // Check if the GameObject reference is not null and is not destroyed
+                if (e != null)
+                {
+                    e.SetActive(true);
+                }
             }
-           
         }
 
-        // Reset dialogue UI
-        dialogueText.text = "";
+        if (dialogueText != null && dialogueText.gameObject.activeInHierarchy)
+        {
+            dialogueText.text = "";
+        }
+
         index = 0;
-        dialoguePanel.SetActive(false);
+        if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
+        {
+            dialoguePanel.SetActive(false);
+        }
     }
+
 
     private void SelectRandomDialogue()
     {
-        if (dialogueSets.Count > 0)
+        if (dialogueSets.Count > 1)  // Make sure there are multiple dialogue sets available
         {
-            int randomIndex = Random.Range(0, dialogueSets.Count);
+            int randomIndex = Random.Range(1, dialogueSets.Count);  // Start from index 1 to skip initial dialogue set
             currentDialogue = dialogueSets[randomIndex];
             index = 0;  // Reset index for new dialogue
+        }
+        else
+        {
+            Debug.LogError("Not enough dialogue sets available.");
         }
     }
 
     public void zeroText()
     {
-        dialogueText.text = "";
+        // Reset dialogue UI
+        if (dialogueText != null && dialogueText.gameObject.activeInHierarchy)
+        {
+            dialogueText.text = "";
+        }
+
         index = 0;
-        dialoguePanel.SetActive(false);
+        if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
+        {
+            dialoguePanel.SetActive(false);
+        }
+
+        // Check and reset enemySpawnPoint
+        if (enemySpawnPoint != null)
+        {
+            for (int i = 0; i < enemySpawnPoint.Length; i++)
+            {
+                if (enemySpawnPoint[i] != null)
+                {
+                    enemySpawnPoint[i].SetActive(true);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -144,6 +214,7 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = false;
+            zeroText();
             EndDialogue();
         }
     }
