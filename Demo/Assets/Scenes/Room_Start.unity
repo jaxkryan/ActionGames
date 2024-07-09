@@ -174,6 +174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawnPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 1394395819282309732, guid: b3c71407598e8d349a4b605303bcd91a, type: 3}
+      propertyPath: m_TagString
+      value: EnemySpawnPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 3051854733148924673, guid: b3c71407598e8d349a4b605303bcd91a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.24
@@ -2157,6 +2161,7 @@ MonoBehaviour:
   nextButton: {fileID: 287057176}
   wordSpeed: 0.05
   playerIsClose: 0
+  enemySpawnPoint: []
 --- !u!1001 &1120610694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2168,6 +2173,10 @@ PrefabInstance:
     - target: {fileID: 1670572082697007339, guid: 0c1ab7f72964dfb428b31ed4560b73c0, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670572082697007339, guid: 0c1ab7f72964dfb428b31ed4560b73c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6963604570927535182, guid: 0c1ab7f72964dfb428b31ed4560b73c0, type: 3}
       propertyPath: m_LocalPosition.x
