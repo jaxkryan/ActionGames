@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Damageable : MonoBehaviour
 {
@@ -160,7 +161,7 @@ public class Damageable : MonoBehaviour
             damageableHit?.Invoke(damage, knockback);
             CharacterEvents.characterDamaged.Invoke(gameObject, damage);
 
-          //  Debug.Log("Hit! Health: " + Health);
+            //  Debug.Log("Hit! Health: " + Health);
             return true;
         }
 

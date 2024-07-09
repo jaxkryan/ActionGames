@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using System.Collections.Generic;
 
 public class BossBattleManager : MonoBehaviour
 {
@@ -37,7 +38,22 @@ public class BossBattleManager : MonoBehaviour
         bossHealthBar.value = bossDamageable.Health;
         bossDamageable.damageableDeath.AddListener(OnBossDeath);
         bossDamageable.damageableHit.AddListener(UpdateBossHealthBar);
-    }
+
+        // Check if the spawned boss is a FlyingEye and assign waypoints by name
+        FlyingEye flyingEye = currentBoss.GetComponent<FlyingEye>();
+        if (flyingEye != null)
+        {
+            // Assign waypoints based on game object names
+            flyingEye.waypoints = new List<Transform>
+            {
+                GameObject.Find("Waypoint1").transform,
+                GameObject.Find("Waypoint2").transform,
+                GameObject.Find("Waypoint3").transform,
+                GameObject.Find("Waypoint4").transform
+                // Add more waypoints as needed
+            };
+        }
+    } 
 
     private void UpdateBossHealthBar(int damage, Vector2 knockback)
     {

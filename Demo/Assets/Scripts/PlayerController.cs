@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirection), typeof(Damageable))]
 public class PlayerController : MonoBehaviour
@@ -118,9 +120,15 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<TouchingDirection>();
         damageable = GetComponent<Damageable>();
-       // lockAttackCollider = GetComponent<CircleCollider2D>();
+        // lockAttackCollider = GetComponent<CircleCollider2D>();
+        // Subscribe to the damageableDeath event
+        damageable.damageableDeath.AddListener(OnPlayerDeath);
     }
-
+    private void OnPlayerDeath()
+    {
+        // Load the Game Over screen
+        SceneManager.LoadScene("GameOver_Screen");
+    }
     void Start()
     {
     }
