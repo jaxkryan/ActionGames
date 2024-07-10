@@ -39,7 +39,7 @@ public class EnemySpawnerController : MonoBehaviour
     {
         gate = GameObject.FindWithTag("Gate"); // Find the gate object with the tag "Gate"
         CloseGate(); // Ensure gate starts closed
-        StartCoroutine(SpawnWaves()); // Start spawning waves
+        //StartCoroutine(SpawnWaves()); // Start spawning waves
     }
 
     void CloseGate()
@@ -67,13 +67,11 @@ public class EnemySpawnerController : MonoBehaviour
 
             while (activeEnemies > 0)
             {
-                yield return null; // Wait until all enemies are defeated
+                yield return null; 
             }
 
-            // Check if this is the final wave
             if (waveNumber == totalWaves)
             {
-                // All enemies of the final wave are defeated, then disable the gate
                 if (activeEnemies == 0)
                 {
                     DisableGate();

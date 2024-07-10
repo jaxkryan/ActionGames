@@ -6,6 +6,8 @@ TagManager:
   tags:
   - EnemySpawnPoint
   - Gate
+  - Enemy
+  - GameCanvas
   layers:
   - Default
   - TransparentFX

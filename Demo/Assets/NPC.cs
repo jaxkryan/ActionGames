@@ -11,7 +11,7 @@ public class NPC : MonoBehaviour
     private string[] currentDialogue;
     private int index;
     private Coroutine co;
-
+    public GameObject gameCanvas;
     public GameObject nextButton;
     public float wordSpeed;
     public bool playerIsClose;
@@ -31,6 +31,7 @@ public class NPC : MonoBehaviour
         dialogueSets.Add(new string[] { "Sometime just sit down and chill", "U have plenty of time here anyway" });
 
         enemySpawnPoint = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
+        gameCanvas = GameObject.FindGameObjectWithTag("GameCanvas");
         if (enemySpawnPoint == null)
         {
             Debug.LogError("EnemySpawnPoint not found! Make sure it's tagged correctly.");
@@ -108,6 +109,7 @@ public class NPC : MonoBehaviour
     private void StartDialogue()
     {
         // Disable EnemySpawnPoint
+        if (gameCanvas != null) { gameCanvas.SetActive(false); }
         if (enemySpawnPoint != null)
         {
             foreach (GameObject e in enemySpawnPoint)
@@ -135,6 +137,7 @@ public class NPC : MonoBehaviour
     private void EndDialogue()
     {
         // Enable EnemySpawnPoint if they exist and are not destroyed
+        if (gameCanvas != null) gameCanvas.SetActive(true);
         if (enemySpawnPoint != null)
         {
             foreach (GameObject e in enemySpawnPoint)
@@ -188,6 +191,7 @@ public class NPC : MonoBehaviour
             dialoguePanel.SetActive(false);
         }
 
+        gameCanvas.SetActive(true);
         // Check and reset enemySpawnPoint
         if (enemySpawnPoint != null)
         {
