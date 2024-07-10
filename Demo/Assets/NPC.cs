@@ -28,7 +28,7 @@ public class NPC : MonoBehaviour
         dialogueSets.Add(new string[] { "Here is Borderdeath", "And you are a lost soul", "Just go ahead", "And your next life will be shown" });
         dialogueSets.Add(new string[] { "Just go ahead", "And find the truth yourself" });
         dialogueSets.Add(new string[] { "How many times i meet you?", "Just wanna say good luck on ur journey to ur next life" });
-        dialogueSets.Add(new string[] { "Sometime just sit down and chill", "U have plenty of time here anyway"});
+        dialogueSets.Add(new string[] { "Sometime just sit down and chill", "U have plenty of time here anyway" });
 
         enemySpawnPoint = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
         if (enemySpawnPoint == null)
@@ -129,7 +129,7 @@ public class NPC : MonoBehaviour
 
         dialoguePanel.SetActive(true);
         StartCoroutine(Typing());
-        
+
     }
 
     private void EndDialogue()
