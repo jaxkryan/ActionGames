@@ -89,7 +89,7 @@ public class Damageable : MonoBehaviour
                     LockVelocity = true;
                     stunEndTime = Time.time + stunDuration;
                     isStunned = true;
-                    Debug.Log("Stunned for duration: " + stunDuration + ", stun end time: " + stunEndTime);
+                    //Debug.Log("Stunned for duration: " + stunDuration + ", stun end time: " + stunEndTime);
                 }
             }
         }
@@ -120,7 +120,6 @@ public class Damageable : MonoBehaviour
         set
         {
             animator.SetBool(AnimationStrings.lockVelocity, value);
-            Debug.Log("LockVelocity set to: " + value);
         }
     }
 
@@ -147,9 +146,7 @@ public class Damageable : MonoBehaviour
             isStunned = false;
             LockVelocity = false;
             animator.SetBool(AnimationStrings.isStun, false);
-            Debug.Log("Stun ended. LockVelocity set to false.");
         }
-        else Debug.Log("No stun");
     }
 
     public bool Hit(int damage, Vector2 knockback)
