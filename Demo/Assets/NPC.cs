@@ -29,6 +29,7 @@ public class NPC : MonoBehaviour
         dialogueSets.Add(new string[] { "Just go ahead", "And find the truth yourself" });
         dialogueSets.Add(new string[] { "How many times i meet you?", "Just wanna say good luck on ur journey to ur next life" });
         dialogueSets.Add(new string[] { "Sometime just sit down and chill", "U have plenty of time here anyway" });
+        dialogueSets.Add(new string[] { "Sometime just sit down and chill", "U have plenty of time here anyway" });
 
         enemySpawnPoint = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
         gameCanvas = GameObject.FindGameObjectWithTag("GameCanvas");
