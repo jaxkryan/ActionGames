@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     public float airWalkSpeed = 3f;
     TouchingDirection touchingDirection;
     Damageable damageable;
+
+    private FireSkill fireSkill; // Reference to the FireSkill script
+
     public bool canMove
     {
         get
@@ -118,7 +121,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<TouchingDirection>();
         damageable = GetComponent<Damageable>();
-       // lockAttackCollider = GetComponent<CircleCollider2D>();
+        fireSkill = GetComponent<FireSkill>(); // Get the FireSkill component
     }
 
     void Start()
@@ -188,7 +191,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if(stopActionWhenDialogue()) return;
+        if (stopActionWhenDialogue()) return;
         if (context.started && canDash)
         {
             StartCoroutine(Dash());
@@ -199,7 +202,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
         {
-            return true; 
+            return true;
         }
         return false;
     }
@@ -224,9 +227,10 @@ public class PlayerController : MonoBehaviour
     public void OnCastFire(InputAction.CallbackContext context)
     {
         if (stopActionWhenDialogue()) return;
-        if (context.started)
+        if (context.started && fireSkill.spellCooldown != null && !fireSkill.spellCooldown.IsCooldownActive)
         {
             animator.SetTrigger(AnimationStrings.castFireTrigger);
+            //fireSkill.FireCast();
         }
     }
 
@@ -278,7 +282,8 @@ public class PlayerController : MonoBehaviour
     public float dashingPower = 24f;
     public float dashingTime = 0.2f;
     public float dashingCd = 1f;
-    [SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField]
+    private TrailRenderer trailRenderer;
 
     private IEnumerator Dash()
     {
@@ -295,7 +300,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            dashDirection = isFacingRight ? -1 : 1; // Dash backward if no input
+            dashDirection = isFacingRight ? -1 : 1; 
         }
 
         rb.velocity = new Vector2(dashDirection * dashingPower, 0f);
@@ -304,7 +309,7 @@ public class PlayerController : MonoBehaviour
         trailRenderer.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
-        IsRunning = true; // Automatically enter run mode after dashing
+        IsRunning = true; 
         yield return new WaitForSeconds(dashingCd);
         canDash = true;
     }
