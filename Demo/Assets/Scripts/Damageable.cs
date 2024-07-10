@@ -8,6 +8,8 @@ public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
     public UnityEvent damageableDeath;
+
+    public UnityEvent<int, int> healthChanged;
     public GameObject dropItem;
     Animator animator;
 
@@ -41,7 +43,9 @@ public class Damageable : MonoBehaviour
         set
         {
             _health = value;
-            if (_health <= 0)
+
+            healthChanged?.Invoke(_health, MaxHealth);
+            if(_health <= 0)
             {
                 IsAlive = false;
             }
@@ -86,7 +90,7 @@ public class Damageable : MonoBehaviour
                     LockVelocity = true;
                     stunEndTime = Time.time + stunDuration;
                     isStunned = true;
-                    Debug.Log("Stunned for duration: " + stunDuration + ", stun end time: " + stunEndTime);
+                    //Debug.Log("Stunned for duration: " + stunDuration + ", stun end time: " + stunEndTime);
                 }
             }
         }
@@ -117,7 +121,6 @@ public class Damageable : MonoBehaviour
         set
         {
             animator.SetBool(AnimationStrings.lockVelocity, value);
-            Debug.Log("LockVelocity set to: " + value);
         }
     }
 
@@ -144,9 +147,7 @@ public class Damageable : MonoBehaviour
             isStunned = false;
             LockVelocity = false;
             animator.SetBool(AnimationStrings.isStun, false);
-            Debug.Log("Stun ended. LockVelocity set to false.");
         }
-        else Debug.Log("No stun");
     }
 
     public bool Hit(int damage, Vector2 knockback)
