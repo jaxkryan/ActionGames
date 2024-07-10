@@ -17,6 +17,7 @@ public class EnemySpawnerController : MonoBehaviour
     private int waveNumber = 1; // Current wave number
     private int activeEnemies = 0; // Active enemy count
     private Coroutine spawnCoroutine; // Coroutine reference for spawning waves
+
     void OnEnable()
     {
         // Start spawning waves when object is enabled
@@ -35,11 +36,12 @@ public class EnemySpawnerController : MonoBehaviour
             spawnCoroutine = null;
         }
     }
+
     void Start()
     {
         gate = GameObject.FindWithTag("Gate"); // Find the gate object with the tag "Gate"
         CloseGate(); // Ensure gate starts closed
-        //StartCoroutine(SpawnWaves()); // Start spawning waves
+        Debug.Log("Gate closed at start.");
     }
 
     void CloseGate()
@@ -54,27 +56,36 @@ public class EnemySpawnerController : MonoBehaviour
     {
         while (waveNumber <= totalWaves)
         {
+            Debug.Log("Starting wave: " + waveNumber);
+
             yield return new WaitForSeconds(timeBetweenWaves);
 
             List<Transform> selectedSpawnPoints = SelectRandomSpawnPoints(spawnPointsPerWave);
+            Debug.Log("Selected " + selectedSpawnPoints.Count + " spawn points for wave " + waveNumber);
             for (int i = 0; i < selectedSpawnPoints.Count; i++)
             {
                 for (int j = 0; j < enemiesPerWave; j++)
                 {
+                    Debug.Log("Spawning enemy " + (j + 1) + " at spawn point " + i);
                     StartCoroutine(SpawnEnemyWithEffect(selectedSpawnPoints[i]));
                 }
             }
 
+            Debug.Log("Enemies spawned. Waiting for them to be defeated.");
+
             while (activeEnemies > 0)
             {
-                yield return null; 
+                yield return null;
             }
+
+            Debug.Log("Wave " + waveNumber + " completed. Active enemies: " + activeEnemies);
 
             if (waveNumber == totalWaves)
             {
                 if (activeEnemies == 0)
                 {
                     DisableGate();
+                    Debug.Log("Final wave completed. Gate disabled.");
                 }
             }
 
@@ -94,6 +105,7 @@ public class EnemySpawnerController : MonoBehaviour
         Destroy(summonEffect);
 
         // Instantiate the enemy
+        Debug.Log("Summon effect complete. Spawning enemy at " + spawnPoint.position);
         SpawnEnemy(spawnPoint);
     }
 
@@ -109,6 +121,7 @@ public class EnemySpawnerController : MonoBehaviour
         GameObject enemyToSpawn = enemyPrefabs[randomIndex];
         GameObject spawnedEnemy = Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
         activeEnemies++;
+        Debug.Log("Enemy spawned. Active enemies: " + activeEnemies);
 
         // Assign waypoints to the flying enemy
         FlyingEye flyingEye = spawnedEnemy.GetComponent<FlyingEye>();
@@ -131,11 +144,13 @@ public class EnemySpawnerController : MonoBehaviour
     public void HandleEnemyDeath()
     {
         activeEnemies--;
+        Debug.Log("Enemy defeated. Active enemies: " + activeEnemies);
 
         // Check if all enemies of the final wave are defeated
         if (waveNumber == totalWaves && activeEnemies == 0)
         {
             DisableGate();
+            Debug.Log("Final wave completed. Gate disabled.");
         }
     }
 
