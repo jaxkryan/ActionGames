@@ -10,7 +10,7 @@ public class Attack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Damageable damageable = collision.GetComponent<Damageable>();
-
+        Debug.Log("Trigger entered with: " + collision.gameObject.name);
         if (damageable != null)
         {
             Vector2 deliveredKnockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
