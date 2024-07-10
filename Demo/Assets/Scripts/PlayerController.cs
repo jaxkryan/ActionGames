@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirection), typeof(Damageable))]
 public class PlayerController : MonoBehaviour
@@ -14,9 +16,6 @@ public class PlayerController : MonoBehaviour
     public float airWalkSpeed = 3f;
     TouchingDirection touchingDirection;
     Damageable damageable;
-
-    private FireSkill fireSkill; // Reference to the FireSkill script
-
     public bool canMove
     {
         get
@@ -121,9 +120,15 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<TouchingDirection>();
         damageable = GetComponent<Damageable>();
-        fireSkill = GetComponent<FireSkill>(); // Get the FireSkill component
+        // lockAttackCollider = GetComponent<CircleCollider2D>();
+        // Subscribe to the damageableDeath event
+        damageable.damageableDeath.AddListener(OnPlayerDeath);
     }
-
+    private void OnPlayerDeath()
+    {
+        // Load the Game Over screen
+        SceneManager.LoadScene("GameOver_Screen");
+    }
     void Start()
     {
     }
@@ -150,7 +155,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (stopActionWhenDialogue()) return;
         moveInput = context.ReadValue<Vector2>();
 
         if (IsAlive)
@@ -178,7 +182,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             IsRunning = true;
@@ -191,24 +194,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (stopActionWhenDialogue()) return;
         if (context.started && canDash)
         {
             StartCoroutine(Dash());
         }
     }
-    public GameObject dialoguePanel;
-    private bool stopActionWhenDialogue()
-    {
-        if (dialoguePanel != null && dialoguePanel.activeInHierarchy)
-        {
-            return true;
-        }
-        return false;
-    }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.attacking);
@@ -217,7 +210,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnRangedAttack(InputAction.CallbackContext context)
     {
-        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.rangedAttackTrigger);
@@ -226,17 +218,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnCastFire(InputAction.CallbackContext context)
     {
-        if (stopActionWhenDialogue()) return;
-        if (context.started && fireSkill.spellCooldown != null && !fireSkill.spellCooldown.IsCooldownActive)
+        if (context.started)
         {
             animator.SetTrigger(AnimationStrings.castFireTrigger);
-            //fireSkill.FireCast();
         }
     }
 
     public void OnLockAttack(InputAction.CallbackContext context)
     {
-        if (stopActionWhenDialogue()) return;
         if (context.started)
         {
             animator.SetTrigger(AnimationStrings.lockAttackTrigger);
@@ -267,7 +256,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (stopActionWhenDialogue()) return;
         //TODO: cant jump when died
         if (context.started && touchingDirection.IsGround && canMove)
         {
@@ -282,8 +270,7 @@ public class PlayerController : MonoBehaviour
     public float dashingPower = 24f;
     public float dashingTime = 0.2f;
     public float dashingCd = 1f;
-    [SerializeField]
-    private TrailRenderer trailRenderer;
+    [SerializeField] private TrailRenderer trailRenderer;
 
     private IEnumerator Dash()
     {
@@ -300,7 +287,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            dashDirection = isFacingRight ? -1 : 1; 
+            dashDirection = isFacingRight ? -1 : 1; // Dash backward if no input
         }
 
         rb.velocity = new Vector2(dashDirection * dashingPower, 0f);
@@ -309,7 +296,7 @@ public class PlayerController : MonoBehaviour
         trailRenderer.emitting = false;
         rb.gravityScale = originalGravity;
         isDashing = false;
-        IsRunning = true; 
+        IsRunning = true; // Automatically enter run mode after dashing
         yield return new WaitForSeconds(dashingCd);
         canDash = true;
     }
