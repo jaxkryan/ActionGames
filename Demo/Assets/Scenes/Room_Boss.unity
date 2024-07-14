@@ -10388,6 +10388,49 @@ Sprite:
   m_PhysicsShape: []
   m_Bones: []
   m_SpriteID: 
+--- !u!1 &678507217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7697781379635836249, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
+  m_PrefabInstance: {fileID: 8805632567032111381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &678507221
+Tilemap:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678507217}
+  m_Enabled: 1
+  m_Tiles: {}
+  m_AnimatedTiles: {}
+  m_TileAssetArray: []
+  m_TileSpriteArray: []
+  m_TileMatrixArray: []
+  m_TileColorArray: []
+  m_TileObjectToInstantiateArray: []
+  m_AnimationFrameRate: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0, y: 0, z: 1}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileOrientation: 0
+  m_TileOrientationMatrix:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
 --- !u!1001 &868894932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11207,11 +11250,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063783077365997933, guid: eb9e9614878d6fd4eafdeefa30e5a087, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.1
+      value: -14.59
       objectReference: {fileID: 0}
     - target: {fileID: 1063783077365997933, guid: eb9e9614878d6fd4eafdeefa30e5a087, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.7
+      value: -5.87
       objectReference: {fileID: 0}
     - target: {fileID: 1063783077365997933, guid: eb9e9614878d6fd4eafdeefa30e5a087, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12137,11 +12180,11 @@ PrefabInstance:
       objectReference: {fileID: 1355678922}
     - target: {fileID: 6963604570927535182, guid: 0c1ab7f72964dfb428b31ed4560b73c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.1
+      value: -14.59
       objectReference: {fileID: 0}
     - target: {fileID: 6963604570927535182, guid: 0c1ab7f72964dfb428b31ed4560b73c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.7
+      value: -5.87
       objectReference: {fileID: 0}
     - target: {fileID: 7908228174054581180, guid: 0c1ab7f72964dfb428b31ed4560b73c0, type: 3}
       propertyPath: spellCooldown
@@ -12198,11 +12241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2811088308467282807, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.06
+      value: 16.52
       objectReference: {fileID: 0}
     - target: {fileID: 2811088308467282807, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.12
+      value: 5.18
       objectReference: {fileID: 0}
     - target: {fileID: 4658555963711899612, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
       propertyPath: m_IsTrigger
@@ -12228,6 +12271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossBattleManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5649297197706765752, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
+      propertyPath: bossPrefab
+      value: 
+      objectReference: {fileID: 4591734722486170938, guid: 31aaaa7db57d06b46a3cd5f3cf3d4a41, type: 3}
     - target: {fileID: 5649297197706765752, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
       propertyPath: playerFollowCamera
       value: 
@@ -12285,6 +12332,14 @@ PrefabInstance:
       value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8140239092257007273, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140239092257007273, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140239092257007273, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
@@ -12295,7 +12350,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7697781379635836249, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 678507221}
   m_SourcePrefab: {fileID: 100100000, guid: bd6abd3e1db560045b35a25367ed8d8b, type: 3}
 --- !u!1001 &8970595502167646587
 PrefabInstance:
