@@ -255,7 +255,7 @@ MonoBehaviour:
   listAction:
   - Room_1
   - Room_3
-  - Room_Boss
+  - Room_5
   listEvent:
   - Room_2
   - Room_4

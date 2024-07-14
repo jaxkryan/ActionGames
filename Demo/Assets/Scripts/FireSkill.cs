@@ -6,11 +6,16 @@ public class FireSkill : MonoBehaviour
 {
     public GameObject firePrefab;
     public Transform launchPoint;
-    public SpellCooldown spellCooldown; // Reference to the SpellCooldown script
+    public string skillTag = "";
+    public SpellCooldown spellCooldown;
 
     void Start()
     {
-            spellCooldown = FindObjectOfType<SpellCooldown>();
+        GameObject cooldownObject = GameObject.FindWithTag(skillTag);
+        if (cooldownObject != null)
+        {
+            spellCooldown = cooldownObject.GetComponent<SpellCooldown>();
+        }
     }
 
     public void FireCast()

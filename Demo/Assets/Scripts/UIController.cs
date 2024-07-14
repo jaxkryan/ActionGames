@@ -5,7 +5,7 @@ public class UIController : MonoBehaviour
 {
     public void StartBtn_Click()
     {
-        SceneManager.LoadScene("Room_Start");
+        SceneManager.LoadScene("StoryScene");
     }
 
     public void RestartBtn_Click()
@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene("MainMenu_Screen");
     }
 
-    private Canvas settingsCanvas;
+    public Canvas settingsCanvas;
     private bool isPaused = false;
 
     void Start()
@@ -62,22 +62,12 @@ public class UIController : MonoBehaviour
 
     public void OpenSettings()
     {
-        if (settingsCanvas != null)
-        {
-            settingsCanvas.gameObject.SetActive(true);
-        }
-        Time.timeScale = 0;
-        isPaused = true;
+        TogglePause();
     }
 
     public void CloseSettings()
     {
-        if (settingsCanvas != null)
-        {
-            settingsCanvas.gameObject.SetActive(false);
-        }
-        Time.timeScale = 1;
-        isPaused = false;
+        TogglePause();
     }
 
     public void ResumeGame()

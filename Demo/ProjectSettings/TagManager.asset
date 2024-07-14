@@ -6,6 +6,11 @@ TagManager:
   tags:
   - EnemySpawnPoint
   - Gate
+  - Enemy
+  - GameCanvas
+  - Skill1
+  - Skill2
+  - Skill3
   layers:
   - Default
   - TransparentFX

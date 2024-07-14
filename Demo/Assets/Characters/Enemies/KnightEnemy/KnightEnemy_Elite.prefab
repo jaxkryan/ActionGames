@@ -216,9 +216,10 @@ GameObject:
   - component: {fileID: -7301531111076587301}
   - component: {fileID: 6503429951786410621}
   - component: {fileID: 154405474496553711}
+  - component: {fileID: -9082804688703720184}
   m_Layer: 8
   m_Name: KnightEnemy_Elite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,7 +414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4591734722486170938}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15b13fa5f0f8e5949b0bc8094b9d04e2, type: 3}
   m_Name: 
@@ -453,6 +454,9 @@ MonoBehaviour:
   damageableDeath:
     m_PersistentCalls:
       m_Calls: []
+  healthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   dropItem: {fileID: 2169320341939109797, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
   isStunned: 1
   stunDuration: 1
@@ -462,6 +466,25 @@ MonoBehaviour:
   isInvincible: 0
   invincibilityTime: 0.25
   _isStun: 0
+--- !u!114 &-9082804688703720184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4591734722486170938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111eb905192cbb54280931817c5a70fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackZone: {fileID: 477284626354402339}
+  cliffDetectionZone: {fileID: 2918008427032465300}
+  walkStopRate: 0.05
+  walkSpeed: 3
+  chaseSpeed: 5
+  detectionRange: 10
+  _hasTarget: 0
 --- !u!1 &4960883968021715329
 GameObject:
   m_ObjectHideFlags: 0
