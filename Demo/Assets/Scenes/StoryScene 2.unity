@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 320152949}
   - component: {fileID: 320152948}
   m_Layer: 5
-  m_Name: Continue
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,7 +226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 274, y: -177}
+  m_AnchoredPosition: {x: 281, y: -166}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320152948
@@ -473,9 +473,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Continue
-
-'
+  m_Text: Exit
 --- !u!222 &569562511
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -702,13 +700,11 @@ MonoBehaviour:
   skipButton: {fileID: 1996782655}
   continueButton: {fileID: 320152948}
   storyLines:
-  - '"I think of death as some delightful journey that I shall take when all my task
-    are complete."'
-  - ' "A journey? Do you believe in what comes after?"'
-  - '"I do. I believe it''s another beginning, a continuation of our story beyond
-    this life."'
+  - '"Seem like you are ready for your new life" - said the fox'
+  - '"Of course"'
+  - '"Good luck, my lord"'
   textDisplaySpeed: 0.03
-  nextSceneName: Room_Start
+  nextSceneName: MainMenu_Screen
 --- !u!4 &1742151628
 Transform:
   m_ObjectHideFlags: 0
@@ -879,8 +875,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.1638, y: -9.4439}
-  m_SizeDelta: {x: 624.2364, y: 266.186}
+  m_AnchoredPosition: {x: -21.2349, y: -0.5667}
+  m_SizeDelta: {x: 611.8103, y: 281.4178}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108686736
 MonoBehaviour:
@@ -965,7 +961,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0.7211304, w: 0.000015258789}
+  m_margin: {x: 0, y: 0, z: -2.5323486, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

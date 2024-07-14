@@ -10431,6 +10431,29 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &749951129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1726636688667219145, guid: d47f7b2153cde144f8a2462b4f26afb4, type: 3}
+  m_PrefabInstance: {fileID: 8970595502167646587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &749951135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749951129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c57391f8e687642b6979ff0c3ee584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storyText: {fileID: 0}
+  skipButton: {fileID: 0}
+  continueButton: {fileID: 0}
+  storyLines: []
+  textDisplaySpeed: 0.05
+  nextSceneName: Room_Start
 --- !u!1001 &868894932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12407,10 +12430,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 4632695978385144942, guid: d47f7b2153cde144f8a2462b4f26afb4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1726636688667219145, guid: d47f7b2153cde144f8a2462b4f26afb4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 749951135}
   m_SourcePrefab: {fileID: 100100000, guid: d47f7b2153cde144f8a2462b4f26afb4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

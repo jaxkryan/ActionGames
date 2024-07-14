@@ -19,6 +19,7 @@ public class StoryManager : MonoBehaviour
     void Start()
     {
         skipButton.onClick.AddListener(SkipStory); // Add listener to the skip button
+        continueButton.onClick.AddListener(SkipStory);
         continueButton.gameObject.SetActive(false); // Hide the continue button at the start
         StartCoroutine(DisplayStory());
     }
@@ -31,7 +32,8 @@ public class StoryManager : MonoBehaviour
             currentLineIndex++;
             yield return new WaitForSeconds(0.5f); // Wait before displaying the next line
         }
-        continueButton.gameObject.SetActive(true); // Show the continue button after the story is complete
+        continueButton.gameObject.SetActive(true);
+        skipButton.gameObject.SetActive(false);
     }
 
     IEnumerator DisplayLine(string line)

@@ -460,8 +460,8 @@ MonoBehaviour:
   dropItem: {fileID: 2169320341939109797, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
   isStunned: 1
   stunDuration: 1
-  _maxHealth: 1
-  _health: 1
+  _maxHealth: 200
+  _health: 200
   _isAlive: 1
   isInvincible: 0
   invincibilityTime: 0.25
@@ -484,6 +484,7 @@ MonoBehaviour:
   walkSpeed: 3
   chaseSpeed: 5
   detectionRange: 10
+  _hasTarget: 0
 --- !u!1 &4960883968021715329
 GameObject:
   m_ObjectHideFlags: 0
