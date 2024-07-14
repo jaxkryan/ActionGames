@@ -82,7 +82,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 1
   knockback: {x: 0, y: 0}
-  stunDuration: 2
+  stunDuration: 0.5
+  skillTag: Skill2
+  spellCooldown: {fileID: 0}
 --- !u!1 &758923863101330094
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 15
-  knockback: {x: 2, y: 0}
+  knockback: {x: 0, y: 0}
 --- !u!1 &1485657781490836906
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 20
-  knockback: {x: 2, y: 0}
+  knockback: {x: 0, y: 0}
 --- !u!1 &1670572082697007339
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +683,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1670572082697007339}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 73bb3464fa3b3f04c9dec0c1a8d08cc1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -704,8 +706,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02933538, y: -0.22058743}
-  m_Size: {x: 0.62394595, y: 1.6394655}
+  m_Offset: {x: -0.036359787, y: -0.20912808}
+  m_Size: {x: 0.6321449, y: 1.5619787}
   m_Direction: 0
 --- !u!114 &4814759533604263766
 MonoBehaviour:
@@ -765,6 +767,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   damageableDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  healthChanged:
     m_PersistentCalls:
       m_Calls: []
   dropItem: {fileID: 2169320341939109797, guid: 0a412343c13056b4fb66b0d30ac72f52, type: 3}
@@ -903,6 +908,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 8847997969909377436, guid: 2bfb1732017909e4cbfa165459b1adc0, type: 3}
   launchPoint: {fileID: 6535070933589624269}
+  skillTag: Skill1
+  spellCooldown: {fileID: 0}
 --- !u!114 &7908228174054581180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +924,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchPoint: {fileID: 6308782148372378380}
   projectilePrefab: {fileID: 1338527739506778704, guid: e3288aeb01c74b24f92e08694114c631, type: 3}
+  skillTag: Skill3
+  spellCooldown: {fileID: 0}
 --- !u!1 &3187044347444843492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
-  knockback: {x: 2, y: 0}
+  knockback: {x: 0, y: 0}
 --- !u!1 &8606077443551498448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,3 +1105,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 8847997969909377436, guid: 2bfb1732017909e4cbfa165459b1adc0, type: 3}
   launchPoint: {fileID: 6535070933589624269}
+  skillTag: Skill1
+  spellCooldown: {fileID: 0}
