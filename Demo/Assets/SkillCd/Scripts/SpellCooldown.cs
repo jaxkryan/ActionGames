@@ -15,6 +15,7 @@ public class SpellCooldown : MonoBehaviour
     private FireSkill fireSkill;
     //variable for looking after the cooldown
     private bool isCoolDown = false;
+    [SerializeField]
     private float cooldownTime = 10.0f;
     private float cooldownTimer = 0.0f;
     public bool IsCooldownActive => isCoolDown;

@@ -7,21 +7,36 @@ public class LockAttack : MonoBehaviour
     public int attackDamage = 10;
     public Vector2 knockback = Vector2.zero;
     public float stunDuration = 2f;
+    public string skillTag; // Tag for this skill
+
+    public SpellCooldown spellCooldown; // Reference to the SpellCooldown script
+
+    void Start()
+    {
+        GameObject cooldownObject = GameObject.FindWithTag(skillTag);
+        if (cooldownObject != null)
+        {
+            spellCooldown = cooldownObject.GetComponent<SpellCooldown>();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Damageable damageable = collision.GetComponent<Damageable>();
-
-        if (damageable != null)
+        if (spellCooldown != null && spellCooldown.UseSpell()) // Check if the spell can be used
         {
-            Vector2 deliveredKnockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
-            bool gotHit = damageable.Hit(attackDamage, deliveredKnockback);
+            Damageable damageable = collision.GetComponent<Damageable>();
 
-            if (gotHit)
+            if (damageable != null)
             {
-                Debug.Log(collision.name + " stunning");
-                damageable.stunDuration = stunDuration;
-                damageable.IsStun = true;
+                Vector2 deliveredKnockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
+                bool gotHit = damageable.Hit(attackDamage, deliveredKnockback);
+
+                if (gotHit)
+                {
+                    Debug.Log(collision.name + " stunning");
+                    damageable.stunDuration = stunDuration;
+                    damageable.IsStun = true;
+                }
             }
         }
     }
