@@ -373,8 +373,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.119458675, y: -0.35588586}
-  m_Size: {x: 1.1045561, y: 2.2895815}
+  m_Offset: {x: -0.07627067, y: -0.39907435}
+  m_Size: {x: 0.70722383, y: 2.2032049}
   m_Direction: 0
 --- !u!114 &-7301531111076587301
 MonoBehaviour:
@@ -439,6 +439,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   damageableDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  healthChanged:
     m_PersistentCalls:
       m_Calls: []
   dropItem: {fileID: 0}

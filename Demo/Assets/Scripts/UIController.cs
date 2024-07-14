@@ -5,7 +5,7 @@ public class UIController : MonoBehaviour
 {
     public void StartBtn_Click()
     {
-        SceneManager.LoadScene("Room_Start");
+        SceneManager.LoadScene("StoryScene");
     }
 
     public void RestartBtn_Click()
