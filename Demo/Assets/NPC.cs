@@ -25,11 +25,13 @@ public class NPC : MonoBehaviour
     void Start()
     {
         dialogueSets = new List<string[]>();  // Initialize the list
-        dialogueSets.Add(new string[] { "Here is Borderdeath", "And you are a lost soul", "Just go ahead", "And your next life will be shown" });
-        dialogueSets.Add(new string[] { "Just go ahead", "And find the truth yourself" });
-        dialogueSets.Add(new string[] { "How many times i meet you?", "Just wanna say good luck on ur journey to ur next life" });
+        dialogueSets.Add(new string[] { "Here is Borderdeath", "And you are a lost soul", "Just go ahead", "And your next life will be shown", "Ok joke aside, you are dead, and this is borderdeath - a land between life and death.", "You must fight for yourself to find a way to your next life, or else you will stuck here forever.", "I will give you these thing to help you fight for your second life.", "Good luck!" });
+        dialogueSets.Add(new string[] { "Quick, go ahead", "And find the truth yourself" });
+        dialogueSets.Add(new string[] { "How many times i meet you?", "Just wanna say good luck on your journey to ur next life" });
         dialogueSets.Add(new string[] { "Sometime just sit down and chill", "U have plenty of time here anyway" });
-        dialogueSets.Add(new string[] { "Sometime just sit down and chill", "U have plenty of time here anyway" });
+        dialogueSets.Add(new string[] { "Next life will be better", "Trust me bro" });
+        dialogueSets.Add(new string[] { "Maybe you can carry me to your next life", "Of course if only you can lift me up first" });
+        dialogueSets.Add(new string[] { "Do you need me to delete your history browser?", "If yes, swing your sword" });
 
         enemySpawnPoint = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
         gameCanvas = GameObject.FindGameObjectWithTag("GameCanvas");

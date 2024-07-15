@@ -20,7 +20,7 @@ public class FireSkill : MonoBehaviour
 
     public void FireCast()
     {
-        if (spellCooldown != null && spellCooldown.UseSpell()) // Check if the spell can be used
+        if (spellCooldown != null && spellCooldown.UseSpell())
         {
             GameObject fireInstance = Instantiate(firePrefab, launchPoint.position, firePrefab.transform.rotation);
             Destroy(fireInstance, 0.5f);
