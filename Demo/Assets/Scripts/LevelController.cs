@@ -94,6 +94,6 @@ public class LevelController : MonoBehaviour
     private void LoadVictoryScreen()
     {
         SavePlayerState();
-        SceneManager.LoadScene("Victory_Screen");
+        SceneManager.LoadScene("StoryScene2");
     }
 }
