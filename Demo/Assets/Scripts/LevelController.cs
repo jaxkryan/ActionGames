@@ -35,6 +35,7 @@ public class LevelController : MonoBehaviour
         // Check if the player has won 2 boss rooms
         if (bossCounter >= 2)
         {
+            bossCounter = 0;
             LoadVictoryScreen();
             return;
         }
