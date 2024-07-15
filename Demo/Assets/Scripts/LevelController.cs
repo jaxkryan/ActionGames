@@ -32,9 +32,15 @@ public class LevelController : MonoBehaviour
 
     public void ShowRoomOptions()
     {
+        // Check if the player has won 2 boss rooms
+        if (bossCounter >= 2)
+        {
+            LoadVictoryScreen();
+            return;
+        }
         roomsVisited++;
 
-        if (roomsVisited % 5 == 0)
+        if (roomsVisited % 3 == 0)
         {
             LoadBossRoom();
         }
@@ -52,7 +58,7 @@ public class LevelController : MonoBehaviour
 
     private void LoadBossRoom()
     {
-        string bossRoomName = (bossCounter % 2 == 0) ? "Room_Boss" : "Room_Boss2";
+        string bossRoomName = (bossCounter % 2 != 0) ? "Room_Boss" : "Room_Boss2";
         bossCounter++;
         SavePlayerState();
         previousScene = bossRoomName;
@@ -83,5 +89,11 @@ public class LevelController : MonoBehaviour
     public void OnEventOptionClicked()
     {
         LoadSelectedScene(false);
+    }
+
+    private void LoadVictoryScreen()
+    {
+        SavePlayerState();
+        SceneManager.LoadScene("Victory_Screen");
     }
 }
