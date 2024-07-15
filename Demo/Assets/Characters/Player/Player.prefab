@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 1
   knockback: {x: 0, y: 0}
-  stunDuration: 0.5
+  stunDuration: 1
   skillTag: Skill2
   spellCooldown: {fileID: 0}
 --- !u!1 &758923863101330094
